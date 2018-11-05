@@ -60,10 +60,7 @@ class NotesAdapter(private val context: Context) : RecyclerView.Adapter<NotesAda
 
     class NotesViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        internal var text: TextView
+        val text: TextView = itemView.findViewById(R.id.text)
 
-        init {
-            text = itemView.findViewById(R.id.text)
-        }
     }
 }
