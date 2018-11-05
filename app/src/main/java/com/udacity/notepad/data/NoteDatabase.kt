@@ -17,7 +17,7 @@ import com.udacity.notepad.data.NotesContract.NoteTable._TABLE_NAME
 
 class NoteDatabase(context: Context) {
 
-    private val helper: NotesOpenHelper
+    private val helper: NotesOpenHelper = NotesOpenHelper(context)
 
     val all: List<Note>
         get() {
@@ -27,10 +27,6 @@ class NoteDatabase(context: Context) {
             cursor.close()
             return retval
         }
-
-    init {
-        helper = NotesOpenHelper(context)
-    }
 
     fun loadAllByIds(vararg ids: Int): List<Note> {
         val questionMarks = StringBuilder()
@@ -117,7 +113,7 @@ class NoteDatabase(context: Context) {
         return values
     }
 
-    private fun fromNotes(notes: Array<Note>): List<ContentValues> {
+    private fun fromNotes(notes: Array<out Note>): List<ContentValues> {
         val values = ArrayList<ContentValues>()
         for (note in notes) {
             values.add(fromNote(note))
